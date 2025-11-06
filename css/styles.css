@@ -5,7 +5,7 @@
 
 }
 
-body {
+  body {
   font-family: "DM Serif Display", serif;
   font-weight: 400;
   font-style: normal;
@@ -62,11 +62,6 @@ span{
 .header ul li a::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0%;
-    height: 3px;
-    background: #47ea83;
     border-radius: 5px;
     transition: width 0.3s ease;
 }
@@ -83,7 +78,7 @@ span{
 
 
 .btn-login {
-    background: #3eb96b;
+    background: #47ea83;
     color: black;                
     padding: 0.8rem 1rem;
     border: none;
