@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v.save - Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: "DM Serif Display", serif;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(#75efa2, #8cf4b2, #bef0cf);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            align-items: center;
+            position: static;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            background: #125132;
+            padding: 1rem 5%;
+        }
+
+        .header .logo {
+            font-size: 3rem;
+            font-weight: bolder;
+            color: rgb(255, 255, 255);
+        }
+
+        span {
+            color: black;
+        }
+
+        .header ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .header ul li a {
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: rgb(255, 255, 255);
+            position: relative;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* underline effect */
+        .header ul li a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0%;
+            height: 3px;
+            background: #47ea83;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .header ul li a:hover,
+        .header ul li a:active {
+            color: #000000;
+            background: rgba(101, 255, 158, 0.15);
+        }
+
+        .header ul li a:hover::after {
+            width: 100%;
+        }
+
+
+        .btn-login {
+            background: #47ea83;
+            color: black;
+            padding: 0.8rem 1rem;
+            border: none;
+            font-size: medium;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .btn-login:hover {
+            background: #249a65;
+            color: black;
+            scale: 103%;
+        }
+
+        .btn-login:active {
+            background: #1c7a50;
+            color: white;
+            scale: 100%;
+        }
+
+
+        .hero.services-hero {
+            background: linear-gradient(#75efa2, #8cf4b2);
+            /* color: white; */
+            padding: 2rem 3rem;
+            text-align: center;
+        }
+
+        .hero-txt h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+
+        .hero-txt h1 span {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #125132;
+        }
+
+
+        .hero-txt p {
+            font-size: 1.1rem;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        /* Services container */
+        .services-container {
+            max-width: 1200px;
+            background: linear-gradient(#8cf4b2, #bef0cf);
+            padding: 2rem;
+        }
+
+        /* Grid layout */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        /* Card styling */
+        .services-grid .card {
+            background: #f9f9f9;
+            border-radius: 15px;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .services-grid .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .services-grid i {
+            color: #28a745;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .services-grid h3 {
+            margin: 0.8rem 0;
+            font-size: 1.4rem;
+        }
+
+        .services-grid p {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        /* Responsive design */
+        @media (max-width: 900px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-txt h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-txt p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            padding: 1.5rem;
+            text-align: center;
+            background: #bef0cf;
+            font-size: 0.9rem;
+        }
+
+        .footer span {
+            color: #125132;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <img src="assects\V.final.png" alt="V.SAVE Logo" class="logo-img" width="100" height="100">
+        <div class="logo">V.SAVE</div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <button class="btn-login"><a href="signup.html">Login/SignUp</a></button>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero services-hero">
+        <div class="hero-txt">
+            <h1>Services <span>V.SAVE </span>Provide</h1>
+            <p>Everything you need to manage your money smartly with <span>V.SAVE</span></p>
+        </div>
+    </section>
+
+    <!-- Services Square Container -->
+    <div class="services-container">
+        <div class="services-grid">
+            <div class="card">
+                <i class="fas fa-wallet"></i>
+                <h3>Expense Tracking</h3>
+                <p>Track every rupee spent and categorize expenses for better control.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Smart Analytics</h3>
+                <p>Get AI-powered insights and tips to improve your spending habits.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-piggy-bank"></i>
+                <h3>Savings Goals</h3>
+                <p>Set financial targets and let V.SAVE keep you on track to achieve them.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>Budget Planning</h3>
+                <p>Create flexible budgets and monitor them in real-time with alerts.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <h3>Income Management</h3>
+                <p>Manage multiple income sources and get clear monthly reports.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-lock"></i>
+                <h3>Secure & Private</h3>
+                <p>Your data is safe with encrypted storage and privacy-first design.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        <p>&copy; 2025 V.SAVE. All Rights Reserved. <br> Developed By <span>Sneha Mishra</span></p>
+    </footer>
+
+
+</body>
+
+</html>
