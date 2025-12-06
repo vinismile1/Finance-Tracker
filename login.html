@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v.save-login page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: "DM Serif Display", serif;
+            background: linear-gradient(#125132, #125132, #47ea83, #75efa2);
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            align-items: center;
+            position: static;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            background: #125132;
+            padding: 1rem 5%;
+        }
+
+        .header .logo {
+            font-size: 3rem;
+            font-weight: bolder;
+            color: rgb(255, 255, 255);
+        }
+
+        span {
+            color: black;
+        }
+
+        .header ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .header ul li a {
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: rgb(255, 255, 255);
+            position: relative;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* underline effect */
+        .header ul li a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0%;
+            height: 3px;
+            background: #47ea83;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .header ul li a:hover,
+        .header ul li a:active {
+            color: #000000;
+            background: rgba(101, 255, 158, 0.15);
+        }
+
+        .header ul li a:hover::after {
+            width: 100%;
+        }
+
+
+        .btn-login {
+            background: #47ea83;
+            color: black;
+            padding: 0.8rem 1rem;
+            border: none;
+            font-size: medium;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .btn-login:hover {
+            background: #249a65;
+            color: black;
+            scale: 103%;
+        }
+
+        .btn-login:active {
+            background: #1c7a50;
+            color: white;
+            scale: 100%;
+        }
+
+
+        .login-container {
+            max-width: 30%;
+            margin-left: 35%;
+            margin-top: 5%;
+            margin-bottom: 5%;
+            background: #fff;
+            padding: 1%;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background: #f9f9f9;
+            max-width: 80%;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 5%;
+            margin: auto;
+        }
+
+        label {
+            display: flex;
+            margin-bottom: 5%;
+            font-weight: bold;
+            color: #000000;
+
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            margin-bottom: 10%;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 2%;
+            width: 90%;
+
+
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            width: 95%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="header">
+        <img src="assects\V.final.png" alt="V.SAVE Logo" class="logo-img" width="100" height="100">
+        <div class="logo">V.SAVE
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+
+                <button class="btn-login"><a href="signup.html">login/SignUp</a></button>
+            </ul>
+        </nav>
+    </header>
+    <div class="login-container">
+        <h1>LOG-IN</h1>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br><br>
+            <label for="password">Confirm Password:</label>
+            <input type="password" id="confirm" name="password" required>
+            <br><br>
+            <button type="submit" id="loginBtn"><a href="dashboad.html">LOG-IN</a></button>
+        </form>
+        <p id="loginMessage"></p>
+    </div>
+
+</body>
+<script>
+    let loginBtn = document.getElementById('loginBtn');
+    if (loginBtn) {
+        loginBtn.onclick = function (event) {
+            event.preventDefault(); // stop form from refreshing
+
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            let msg = document.getElementById('loginMessage');
+
+            let user = localStorage.getItem(username);
+
+            if (!user) {
+                msg.innerText = "User not found.";
+                msg.style.color = "red";
+                return;
+            }
+
+            user = JSON.parse(user);
+
+            if (user.password === password) {
+                msg.innerText = "Login successful!";
+                msg.style.color = "green";
+
+                // Redirect after 1 second
+                setTimeout(() => {
+                    window.location.href = "dashboad.html"; // change to your page
+                }, 1000);
+            } else {
+                msg.innerText = "Incorrect password.";
+                msg.style.color = "red";
+            }
+        }
+    }
+
+
+
+</script>
+
+</html>

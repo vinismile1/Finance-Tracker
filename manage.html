@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>v.save - Manager</title>
+  <style>
+    body {
+      font-family: "DM Serif Display", serif;
+      font-weight: 400;
+      font-style: normal;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #47ea83, #75efa2, #8cf4b2);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      align-items: center;
+      position: static;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      background: #125132;
+      padding: 1rem 5%;
+    }
+
+    .header .logo {
+      font-size: 3rem;
+      font-weight: bolder;
+      color: rgb(255, 255, 255);
+    }
+
+    span {
+      color: black;
+    }
+
+    .header ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .header ul li a {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.5rem;
+      color: rgb(255, 255, 255);
+      position: relative;
+      padding: 0.5rem 0.8rem;
+      border-radius: 10px;
+      transition: color 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* underline effect */
+    .header ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 3px;
+      background: #47ea83;
+      border-radius: 5px;
+      transition: width 0.3s ease;
+    }
+
+    .header ul li a:hover,
+    .header ul li a:active {
+      color: #ffffff;
+      background: rgba(101, 255, 158, 0.15);
+    }
+
+    .header ul li a:hover::after {
+      width: 100%;
+    }
+
+
+    .btn-login {
+      background: #47ea83;
+      color: black;
+      padding: 0.8rem 1rem;
+      border: none;
+      font-size: medium;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .btn-login:hover {
+      background: #249a65;
+      color: black;
+      scale: 103%;
+    }
+
+    .btn-login:active {
+      background: #1c7a50;
+      color: white;
+      scale: 100%;
+    }
+
+    .manage-container {
+      display: flex;
+      justify-content: space-around;
+      max-width: 900px;
+      margin: 20px auto;
+      background: white;
+      padding: 18px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    /* Common card style for form and list */
+    .card {
+      flex: 1;
+      margin: 10px;
+      max-width: 400px;
+      min-height: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+    }
+
+    input,
+    select {
+      width: 100%;
+      /* full width of parent */
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      /* no overflow */
+    }
+
+    button {
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .green-btn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .green-btn:hover {
+      background-color: #218838;
+    }
+
+    #cancel-edit {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    #cancel-edit:hover {
+      background-color: #b02a37;
+    }
+
+    /* side by side buttons */
+    form div {
+      display: flex;
+      gap: 10px;
+    }
+
+    form div button {
+      flex: 1;
+      /* each button takes half width */
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .small-btn {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <img src="assects\V.final.png" alt="V.SAVE Logo" class="logo-img" width="100" height="100">
+    <div class="logo">V.SAVE
+    </div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+
+        <button class="btn-login"><a href="signup.html">login/SignUp</a></button>
+      </ul>
+    </nav>
+  </header>
+  <div class="manage-container">
+    <section class="card">
+      <h2>Add / Edit Expense</h2>
+      <form id="expense-form">
+        <input type="hidden" id="expense-id" />
+        <label>Date <br><br><input type="date" id="date" required></label>
+        <label>Category<br><br>
+          <select id="category" required>
+            <option value="">Select Category</option>
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Entertainment</option>
+            <option>Utilities</option>
+            <option>Others</option>
+          </select>
+        </label>
+        <label>Amount <br><br><input type="number" id="amount" min="0" step="0.01" required></label>
+        <label>Description<br><br> <input type="text" id="description"></label>
+        <div style="display:flex; gap:10px;">
+          <button type="submit" class="green-btn">Save</button>
+          <button type="button" id="cancel-edit">Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Expense List</h2>
+      <table id="expense-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+    (() => {
+      const STORAGE_KEY = 'vsave_expenses_v1';
+      let expenses = [];
+
+      // Helpers
+      function parseDateInput(d) {
+        if (!d) return null;
+        const [y, m, day] = d.split('-').map(Number);
+        return new Date(y, m - 1, day);
+      }
+
+      function load() {
+        expenses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        // ensure amounts are numbers
+        expenses = expenses.map(e => ({ ...e, amount: Number(e.amount) }));
+        renderTable();
+      }
+
+      function save() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(expenses));
+        // NOTE: storage event will fire in other tabs (View page)
+      }
+
+      function renderTable() {
+        const tbody = document.querySelector('#expense-table tbody');
+        tbody.innerHTML = '';
+        if (!expenses.length) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = '<td colspan="5" style="text-align:center;color:#666;">No expenses yet</td>';
+          tbody.appendChild(tr);
+          return;
+        }
+        expenses.slice().reverse().forEach(exp => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+        <td>${exp.date}</td>
+        <td>${exp.category}</td>
+        <td>${exp.amount.toFixed(2)}</td>
+        <td>${exp.description || ''}</td>
+        <td>
+          <button class="small-btn" data-action="edit" data-id="${exp.id}">Edit</button>
+          <button class="small-btn" data-action="delete" data-id="${exp.id}">Delete</button>
+        </td>
+      `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // form
+      const form = document.getElementById('expense-form');
+      form.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        const idField = document.getElementById('expense-id');
+        const date = document.getElementById('date').value;
+        const category = document.getElementById('category').value;
+        const amount = parseFloat(document.getElementById('amount').value);
+        const description = document.getElementById('description').value.trim();
+
+        if (!date || !category || isNaN(amount)) {
+          alert('Fill date, category and valid amount');
+          return;
+        }
+
+        if (idField.value) {
+          // edit existing
+          const id = Number(idField.value);
+          const idx = expenses.findIndex(e => e.id === id);
+          if (idx >= 0) {
+            expenses[idx] = { id, date, category, amount, description };
+          }
+        } else {
+          // new
+          const newExpense = { id: Date.now(), date, category, amount, description };
+          expenses.push(newExpense);
+        }
+
+        save();
+        renderTable();
+        form.reset();
+        idField.value = '';
+      });
+
+      // cancel edit
+      document.getElementById('cancel-edit').addEventListener('click', () => {
+        form.reset();
+        document.getElementById('expense-id').value = '';
+      });
+
+      // table click (edit/delete)
+      document.querySelector('#expense-table tbody').addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        const action = btn.dataset.action;
+        const id = Number(btn.dataset.id);
+        if (action === 'delete') {
+          if (!confirm('Delete this expense?')) return;
+          expenses = expenses.filter(x => x.id !== id);
+          save();
+          renderTable();
+        } else if (action === 'edit') {
+          const exp = expenses.find(x => x.id === id);
+          if (!exp) return;
+          document.getElementById('expense-id').value = exp.id;
+          document.getElementById('date').value = exp.date;
+          document.getElementById('category').value = exp.category;
+          document.getElementById('amount').value = exp.amount;
+          document.getElementById('description').value = exp.description;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      // initial load
+      load();
+    })();
+  </script>
+</body>
+
+</html>

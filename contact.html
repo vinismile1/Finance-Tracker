@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v.save-contect</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: "DM Serif Display", serif;
+      font-weight: 400;
+      font-style: normal;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(#75efa2, #8cf4b2, #bef0cf);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      align-items: center;
+      position: static;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      background: #125132;
+      padding: 1rem 5%;
+    }
+
+    .header .logo {
+      font-size: 3rem;
+      font-weight: bolder;
+      color: rgb(255, 255, 255);
+    }
+
+    span {
+      color: black;
+    }
+
+    .header ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .header ul li a {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.5rem;
+      color: rgb(255, 255, 255);
+      position: relative;
+      padding: 0.5rem 0.8rem;
+      border-radius: 10px;
+      transition: color 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* underline effect */
+    .header ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 3px;
+      background: #47ea83;
+      border-radius: 5px;
+      transition: width 0.3s ease;
+    }
+
+    .header ul li a:hover,
+    .header ul li a:active {
+      color: #000000;
+      background: rgba(101, 255, 158, 0.15);
+    }
+
+    .header ul li a:hover::after {
+      width: 100%;
+    }
+
+
+    .btn-login {
+      background: #47ea83;
+      color: black;
+      padding: 0.8rem 1rem;
+      border: none;
+      font-size: medium;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .btn-login:hover {
+      background: #249a65;
+      color: black;
+      scale: 103%;
+    }
+
+    .btn-login:active {
+      background: #1c7a50;
+      color: white;
+      scale: 100%;
+    }
+
+
+    .hero-txt h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-txt p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+      line-height: 1.5;
+    }
+
+    /* Contact Info Section */
+    .contact-info {
+      padding: 4rem 5%;
+      text-align: center;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .card:nth-child(1) i {
+      color: #25D366;
+    }
+
+    .card:nth-child(2) i {
+      color: #0077b5;
+    }
+
+    .card:nth-child(3) i {
+      color: #d14836;
+    }
+
+    .card:nth-child(4) i {
+      color: #333;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #125132;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .card:hover a {
+      color: #26c47d;
+    }
+
+    .footer {
+      padding: 1.5rem;
+      text-align: center;
+      background: #bef0cf;
+      font-size: 0.9rem;
+    }
+
+    .footer span {
+      color: #125132;
+      font-weight: bold;
+    }
+  </style>
+  <!-- Font Awesome
+  <script src="https://kit.fontawesome.com/4f8b5c1b4b.js" crossorigin="anonymous"></script> -->
+</head>
+
+<body>
+  <header class="header">
+    <img src="assects\V.final.png" alt="V.SAVE Logo" class="logo-img" width="100" height="100">
+    <div class="logo">V.SAVE</div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contect.html">Contact</a></li>
+        <button class="btn-login"><a href="signup.html">Login/SignUp</a></button>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="contact-info">
+    <div class="hero-txt">
+      <h1>Contact Us</h1>
+      <p>Anytime you need help managing your money smartly, feel free to connect with <span>V.SAVE</span>.</p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <i class="fa-brands fa-whatsapp"></i>
+        <a href="https://wa.me/7289000014" target="_blank">Chat on WhatsApp</a>
+      </div>
+      <div class="card">
+        <i class="fab fa-linkedin"></i>
+        <a href="https://www.linkedin.com/in/" target="_blank">Connect on LinkedIn</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:snehamishra@0013.com">Send an Email</a>
+      </div>
+      <div class="card">
+        <i class="fab fa-github"></i>
+        <a href="https://github.com/vinismile1" target="_blank">View GitHub</a>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="footer">
+    <p>&copy; 2025 V.SAVE. All Rights Reserved. <br> Developed By <span>Sneha Mishra</span></p>
+  </footer>
+
+
+</body>
+
+</html>

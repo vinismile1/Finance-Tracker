@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v.save-dashboad</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/dashboad.css">
+</head>
+
+<body>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>V.SAVE</h2>
+      <button id="close" class="closebtn">✖</button>
+    </div>
+
+    <ul class="menu">
+      <li><a href="dashboad.html"><i class="fa-solid fa-table-columns"></i> Dashboard</a></li>
+      <li><a href="manage.html">📝 Manage</a></li>
+      <li><a href="view.html">🔍 View</a></li>
+      <li><a href="target.html">🎯 Target</a></li>
+      <li><a href="consult.html">👥 Consult</a></li>
+      <li><a href="logout.html">🏃‍♀️ Log out</a></li>
+    </ul>
+  </aside>
+
+  <div class="main-content">
+    <header class="dashboad-header">
+      <button id="menubtn" class="meanubtn">≣</button>
+      <h1>Dashboard</h1>
+    </header>
+
+    <section class="dashboad-body">
+      <div class="card">
+        <h3>Total Balance</h3>
+        <strong>
+          <p></p>
+        </strong>
+      </div>
+      <div class="card">
+        <h3>Monthly Expense</h3>
+        <strong>
+          <p></p>
+        </strong>
+      </div>
+      <div class="card">
+        <h3>Weekly Expense</h3>
+        <strong>
+          <p></p>
+        </strong>
+      </div>
+    </section>
+  </div>
+
+
+</body>
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const menuBtn = document.getElementById("menubtn");
+  const closeBtn = document.getElementById("close");
+  const mainContent = document.querySelector(".main-content");
+
+  menuBtn.addEventListener("click", () => {
+    sidebar.classList.add("active");
+    mainContent.classList.toggle("shift");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+    mainContent.classList.remove("shift");
+  });
+  document.addEventListener("click", (e) => {
+    if (
+      sidebar.classList.contains("open") &&
+      !sidebar.contains(e.target) &&
+      e.target !== menuBtn
+    ) {
+      sidebar.classList.remove("open");
+      mainContent.classList.remove("shift");
+    }
+  });
+
+</script>
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", ()=> {
+    const sidebar = document.getElementById("sidebar");
+    const menuBtn = document.getElementById("menubtn");
+    const closeBtn = document.getElementById("close");
+    const mainContent = document.querySelector(".main-content");
+
+    // Open Sidebar
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      mainContent.classList.toggle("shift");
+    });
+
+    // Close Sidebar
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      mainContent.classList.remove("shift");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        sidebar.classList.contains("open") &&
+        !sidebar.contains(e.target) &&
+        e.target !== menuBtn
+      ) {
+        sidebar.classList.remove("open");
+        mainContent.classList.remove("shift");
+      }
+    });
+});    
+</script> -->
+
+</html>

@@ -1,0 +1,286 @@
+    body {
+      font-family: "DM Serif Display", serif;
+      font-weight: 400;
+      font-style: normal;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f9;
+    }
+
+    .main-content {
+      background: linear-gradient(135deg, #125132, #47ea83, #75efa2);
+      height: 100vh;
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+      padding: 1rem;
+    }
+
+    .main-content.shift {
+      margin-left: 250px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 250px;
+      height: 100vh;
+      background: #125132;
+      color: #fff;
+      padding: 1rem;
+      transition: left 0.3s ease;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin-top: 2rem;
+    }
+
+    .menu li {
+      margin: 1rem 0;
+    }
+
+    .menu li a {
+      display: block;
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+      font-size: 1rem;
+      padding: 0.7rem 1rem;
+      border-radius: 6px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .menu li a:hover {
+      background: #47ea83;
+      color: #181818;
+    }
+
+
+    /* Header */
+    .dashboad-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background: #125132;
+      color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .meanubtn,
+    .closebtn {
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Cards */
+    .dashboad-body {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .card strong {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      color: #47ea83;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+
+    @media (max-width: 768px) {
+      .main-content.shift {
+        margin-left: 0;
+      }
+
+      .sidebar {
+        width: 220px;
+      }
+
+      .dashboard-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+
+
+
+
+    /* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sidebar */
+    /* .sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 250px;
+  height: 100%;
+  background: linear-gradient(45deg, #edf8fd, #96fdfd);
+  color: black;
+  padding: 1rem;
+  transition: left 0.3s ease;
+  z-index: 2000;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.sidebar-header h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.sidebar-header span {
+  color: #3b82f6;
+}
+
+.closebtn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Sidebar Menu */
+    /* .menu {
+  list-style: none;
+}
+.menu li {
+  margin: 1rem 0;
+}
+.menu li a {
+  display: block;
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  transition: background 0.3s, color 0.3s;
+}
+.menu li a:hover {
+  background: #2563eb;
+  color: white;
+} */
+
+    /* Main Content */
+    /* .main-content {
+    background: linear-gradient(135deg, #f0f9ff, #96fdfd);
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+  padding: 1rem;
+}
+
+.main-content.shift {
+  margin-left: 250px;
+} */
+
+    /* Dashboard Header */
+    /* .dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-header h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.menubtn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+} */
+
+    /* Dashboard Body */
+    /* .dashboard-body {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card strong {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: #2563eb;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+
+@media (max-width: 768px) {
+  .main-content.shift {
+    margin-left: 0; 
+  }
+  .sidebar {
+    width: 220px;
+  }
+  .dashboard-body {
+    grid-template-columns: 1fr;
+  }
+} */

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="edit-container">
+        
+        <form id="edit-form">
+            <label for="edit-amount">Amount</label>
+            <input type="number" id="edit-amount" required>
+
+            
+
+            <button type="submit">Save Changes</button>
+        </form>
+         <ul id="list">
+
+         </ul>
+
+    </div>
+</body>
+<script>
+
+    function change(){
+       let money= document.getElementById("edit-amount").value
+       let li=document.createElement("li")
+    }
+    const newRow=li.insertbody();
+    newRow.innerHTML=`ul.appendChild(li)`
+
+
+    
+    document.getElementById('edit-form').addEventListener('click', function(event) {
+        event.preventDefault();
+        let editbutton=document.createElement("button")
+        editbutton.innerHTML="edit"
+        newRow.querySelector('.edit').editbutton.onclick=function(){
+        document.getElementById('edit-amount').value = edit-amount;
+        li.remove(newRow);
+        }
+        
+    });
+</script>
+</html>
+
+ 
+    
+
+
+   
