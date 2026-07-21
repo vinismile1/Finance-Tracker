@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v.save-dashboad</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/dashboad.css">
+</head>
+
+<body>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>V.SAVE</h2>
+      <button id="close" class="closebtn">✖</button>
+    </div>
+
+    <ul class="menu">
+      <li><a href="dashboad.html"><i class="fa-solid fa-table-columns"></i> Dashboard</a></li>
+      <li><a href="manage.html">📝 Manage</a></li>
+      <li><a href="view.html">🔍 View</a></li>
+      <li><a href="target.html">🎯 Target</a></li>
+      <li><a href="consult.html">👥 Consult</a></li>
+      <li><a href="logout.html">🏃‍♀️ Log out</a></li>
+    </ul>
+  </aside>
+
+  <div class="main-content">
+    <header class="dashboad-header">
+      <button id="menubtn" class="meanubtn">≣</button>
+      <h1>Dashboard</h1>
+    </header>
+
+    <section class="dashboad-body">
+      <div class="card">
+        <h3>Total Balance</h3>
+        <strong>
+          <p id="totalBalance">₹0.00</p>
+        </strong>
+      </div>
+      <div class="card">
+        <h3>Monthly Expense</h3>
+        <strong>
+          <p id="monthlyExpense">₹0.00</p>
+        </strong>
+      </div>
+      <div class="card">
+        <h3>Weekly Expense</h3>
+        <strong>
+          <p id="weeklyExpense">₹0.00</p>
+        </strong>
+      </div>
+    </section>
+
+    <section style="margin-top: 2rem; background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+      <h2 style="color: #125132; margin-bottom: 1rem;">Recent Expenses</h2>
+      <div id="recentExpensesList"></div>
+    </section>
+  </div>
+
+
+</body>
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const menuBtn = document.getElementById("menubtn");
+  const closeBtn = document.getElementById("close");
+  const mainContent = document.querySelector(".main-content");
+
+  if (menuBtn && sidebar) {
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+      sidebar.classList.toggle("open");
+      mainContent.classList.toggle("shift");
+    });
+  }
+
+  if (closeBtn && sidebar) {
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+      sidebar.classList.remove("open");
+      mainContent.classList.remove("shift");
+    });
+  }
+
+  // Calculate metrics from localStorage
+  function updateDashboardMetrics() {
+    const STORAGE_KEY = 'vsave_expenses_v1';
+    let expenses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    // Seed sample expenses if empty for first time demo
+    if (!expenses || expenses.length === 0) {
+      const todayStr = new Date().toISOString().split('T')[0];
+      expenses = [
+        { id: 101, date: todayStr, category: 'Food', amount: 350, description: 'Lunch' },
+        { id: 102, date: todayStr, category: 'Transport', amount: 120, description: 'Cab fare' },
+        { id: 103, date: todayStr, category: 'Utilities', amount: 1500, description: 'Internet bill' }
+      ];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(expenses));
+    }
+
+    const now = new Date();
+    let total = 0;
+    let monthly = 0;
+    let weekly = 0;
+
+    expenses.forEach(e => {
+      const amt = Number(e.amount) || 0;
+      total += amt;
+
+      if (e.date) {
+        const [y, m, d] = e.date.split('-').map(Number);
+        const expDate = new Date(y, m - 1, d);
+
+        // Monthly check
+        if (expDate.getMonth() === now.getMonth() && expDate.getFullYear() === now.getFullYear()) {
+          monthly += amt;
+        }
+
+        // Weekly check (past 7 days)
+        const diffDays = Math.floor((now - expDate) / (1000 * 60 * 60 * 24));
+        if (diffDays >= 0 && diffDays <= 7) {
+          weekly += amt;
+        }
+      }
+    });
+
+    const balanceElem = document.getElementById('totalBalance');
+    const monthlyElem = document.getElementById('monthlyExpense');
+    const weeklyElem = document.getElementById('weeklyExpense');
+
+    if (balanceElem) balanceElem.innerText = `₹${total.toFixed(2)}`;
+    if (monthlyElem) monthlyElem.innerText = `₹${monthly.toFixed(2)}`;
+    if (weeklyElem) weeklyElem.innerText = `₹${weekly.toFixed(2)}`;
+
+    // Render Recent Expenses
+    const recentDiv = document.getElementById('recentExpensesList');
+    if (recentDiv) {
+      if (expenses.length === 0) {
+        recentDiv.innerHTML = '<p style="color:#666;">No expenses recorded yet. Go to Manage to add expenses.</p>';
+      } else {
+        const sorted = [...expenses].reverse().slice(0, 5);
+        let html = '<table style="width:100%; border-collapse:collapse;"><thead><tr style="background:#f4f6f9; text-align:left;"><th style="padding:10px;">Date</th><th style="padding:10px;">Category</th><th style="padding:10px;">Amount</th><th style="padding:10px;">Description</th></tr></thead><tbody>';
+        sorted.forEach(item => {
+          html += `<tr style="border-bottom: 1px solid #eee;">
+            <td style="padding:10px;">${item.date}</td>
+            <td style="padding:10px;">${item.category}</td>
+            <td style="padding:10px; font-weight:bold; color:#125132;">₹${Number(item.amount).toFixed(2)}</td>
+            <td style="padding:10px;">${item.description || '-'}</td>
+          </tr>`;
+        });
+        html += '</tbody></table>';
+        recentDiv.innerHTML = html;
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', updateDashboardMetrics);
+  updateDashboardMetrics();
+</script>
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", ()=> {
+    const sidebar = document.getElementById("sidebar");
+    const menuBtn = document.getElementById("menubtn");
+    const closeBtn = document.getElementById("close");
+    const mainContent = document.querySelector(".main-content");
+
+    // Open Sidebar
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      mainContent.classList.toggle("shift");
+    });
+
+    // Close Sidebar
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      mainContent.classList.remove("shift");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        sidebar.classList.contains("open") &&
+        !sidebar.contains(e.target) &&
+        e.target !== menuBtn
+      ) {
+        sidebar.classList.remove("open");
+        mainContent.classList.remove("shift");
+      }
+    });
+});    
+</script> -->
+
+</html>

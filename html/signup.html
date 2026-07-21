@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v.save-login page</title>
+    <title>v.save-SignUp page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
     <style>
         body {
             font-family: "DM Serif Display", serif;
-            background: linear-gradient(#125132, #125132, #47ea83, #75efa2);
+            font-weight: 400;
+            font-style: normal;
             margin: 0;
             padding: 0;
+            background: linear-gradient(135deg, #75efa2, #8cf4b2, #bef0cf);
         }
 
         .header {
@@ -103,8 +104,7 @@
             scale: 100%;
         }
 
-
-        .login-container {
+        .signup-container {
             max-width: 30%;
             margin-left: 35%;
             margin-top: 5%;
@@ -113,6 +113,10 @@
             padding: 1%;
             border-radius: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+
+
+
 
         }
 
@@ -139,6 +143,7 @@
         }
 
         input[type="text"],
+        input[type="email"],
         input[type="password"] {
             margin-bottom: 10%;
             border: 1px solid #ccc;
@@ -163,12 +168,11 @@
             background-color: #218838;
         }
     </style>
-
 </head>
 
 <body>
     <header class="header">
-        <img src="assects\V.final.png" alt="V.SAVE Logo" class="logo-img" width="100" height="100">
+        <img src="assects/V.final.png" alt="V.SAVE Logo" class="logo-img" width="100" height="100">
         <div class="logo">V.SAVE
         </div>
         <nav class="navbar">
@@ -177,15 +181,19 @@
                 <li><a href="services.html">Services</a></li>
                 <li><a href="contact.html">Contact</a></li>
 
-                <button class="btn-login"><a href="signup.html">login/SignUp</a></button>
+                <button class="btn-login" onclick="window.location.href='signup.html'">Login/SignUp</button>
             </ul>
         </nav>
     </header>
-    <div class="login-container">
-        <h1>LOG-IN</h1>
-        <form>
+
+    <div class="signup-container">
+        <h1> SIGN UP</h1>
+        <form id="signuinForm">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
+            <br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
             <br><br>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
@@ -193,49 +201,49 @@
             <label for="password">Confirm Password:</label>
             <input type="password" id="confirm" name="password" required>
             <br><br>
-            <button type="submit" id="loginBtn"><a href="dashboad.html">LOG-IN</a></button>
+            <button type="submit" id="signupBtn">SIGN-UP</button>
         </form>
-        <p id="loginMessage"></p>
+        <p id="signupMessage"></p>
     </div>
-
 </body>
 <script>
-    let loginBtn = document.getElementById('loginBtn');
-    if (loginBtn) {
-        loginBtn.onclick = function (event) {
-            event.preventDefault(); // stop form from refreshing
-
-            let username = document.getElementById('username').value;
+    let form = document.getElementById('signuinForm');
+    if (form) {
+        form.onsubmit = function (e) {
+            e.preventDefault();
+            let username = document.getElementById('username').value.trim();
+            let email = document.getElementById('email').value.trim();
             let password = document.getElementById('password').value;
-            let msg = document.getElementById('loginMessage');
+            let confirm = document.getElementById('confirm').value;
+            let msg = document.getElementById('signupMessage');
 
-            let user = localStorage.getItem(username);
-
-            if (!user) {
-                msg.innerText = "User not found.";
+            if (!username || !email || !password || !confirm) {
+                msg.innerText = "Please fill all fields.";
                 msg.style.color = "red";
                 return;
             }
 
-            user = JSON.parse(user);
-
-            if (user.password === password) {
-                msg.innerText = "Login successful!";
-                msg.style.color = "green";
-
-                // Redirect after 1 second
-                setTimeout(() => {
-                    window.location.href = "dashboad.html"; // change to your page
-                }, 1000);
-            } else {
-                msg.innerText = "Incorrect password.";
+            if (password !== confirm) {
+                msg.innerText = "Passwords do not match.";
                 msg.style.color = "red";
+                return;
             }
+
+            let user = {
+                email: email,
+                password: password
+            };
+
+            localStorage.setItem(username, JSON.stringify(user));
+            localStorage.setItem('currentUser', username);
+            msg.innerText = "Signup successful!";
+            msg.style.color = "green";
+
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 800);
         }
     }
-
-
-
 </script>
 
 </html>

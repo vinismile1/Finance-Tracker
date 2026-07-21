@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v.save - Targets & Savings Goals</title>
+  <link rel="stylesheet" href="css/dashboad.css">
+  <style>
+    body {
+      font-family: "DM Serif Display", serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    .goal-card {
+      background: white;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .progress-bar {
+      background: #e0e0e0;
+      border-radius: 8px;
+      height: 16px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-fill {
+      background: #28a745;
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    .form-box {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    input, button {
+      padding: 10px;
+      margin: 6px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button.save-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>V.SAVE</h2>
+      <button id="close" class="closebtn">✖</button>
+    </div>
+
+    <ul class="menu">
+      <li><a href="dashboad.html"><i class="fa-solid fa-table-columns"></i> Dashboard</a></li>
+      <li><a href="manage.html">📝 Manage</a></li>
+      <li><a href="view.html">🔍 View</a></li>
+      <li><a href="target.html" class="active">🎯 Target</a></li>
+      <li><a href="consult.html">👥 Consult</a></li>
+      <li><a href="logout.html">🏃‍♀️ Log out</a></li>
+    </ul>
+  </aside>
+
+  <div class="main-content">
+    <header class="dashboad-header">
+      <button id="menubtn" class="meanubtn">≣</button>
+      <h1>Savings Targets & Goals</h1>
+    </header>
+
+    <div class="container">
+      <div class="form-box">
+        <h2>Add Savings Goal</h2>
+        <form id="goalForm">
+          <label style="display:block; font-weight:bold;">Goal Name:</label>
+          <input type="text" id="goalName" placeholder="e.g. Vacation Fund, Emergency Pool" required style="width:100%; box-sizing:border-box;">
+          
+          <label style="display:block; font-weight:bold; margin-top:10px;">Target Amount (₹):</label>
+          <input type="number" id="goalTarget" placeholder="e.g. 50000" required style="width:100%; box-sizing:border-box;">
+          
+          <label style="display:block; font-weight:bold; margin-top:10px;">Saved So Far (₹):</label>
+          <input type="number" id="goalSaved" placeholder="e.g. 15000" required style="width:100%; box-sizing:border-box;">
+
+          <button type="submit" class="save-btn" style="width:100%; margin-top:12px;">Save Goal</button>
+        </form>
+      </div>
+
+      <h2>Your Active Goals</h2>
+      <div id="goalsList"></div>
+    </div>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById("sidebar");
+    const menuBtn = document.getElementById("menubtn");
+    const closeBtn = document.getElementById("close");
+    const mainContent = document.querySelector(".main-content");
+
+    if (menuBtn && sidebar) {
+      menuBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+        sidebar.classList.toggle("open");
+        mainContent.classList.toggle("shift");
+      });
+    }
+
+    if (closeBtn && sidebar) {
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        sidebar.classList.remove("open");
+        mainContent.classList.remove("shift");
+      });
+    }
+
+    const TARGETS_KEY = 'vsave_targets_v1';
+    let targets = JSON.parse(localStorage.getItem(TARGETS_KEY)) || [
+      { id: 1, name: 'Emergency Fund', target: 50000, saved: 20000 },
+      { id: 2, name: 'Gadget Savings', target: 25000, saved: 18000 }
+    ];
+
+    function renderGoals() {
+      const list = document.getElementById('goalsList');
+      if (!targets.length) {
+        list.innerHTML = '<p style="color:#666;">No targets created yet.</p>';
+        return;
+      }
+      let html = '';
+      targets.forEach(t => {
+        const pct = Math.min(100, Math.round((t.saved / t.target) * 100));
+        html += `
+          <div class="goal-card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h3 style="margin:0; color:#125132;">${t.name}</h3>
+              <button onclick="deleteGoal(${t.id})" style="background:#dc3545; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">Delete</button>
+            </div>
+            <p style="margin:8px 0;">Saved ₹${t.saved} of ₹${t.target} (${pct}%)</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:${pct}%;"></div>
+            </div>
+          </div>
+        `;
+      });
+      list.innerHTML = html;
+    }
+
+    function deleteGoal(id) {
+      targets = targets.filter(t => t.id !== id);
+      localStorage.setItem(TARGETS_KEY, JSON.stringify(targets));
+      renderGoals();
+    }
+
+    document.getElementById('goalForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('goalName').value;
+      const target = Number(document.getElementById('goalTarget').value);
+      const saved = Number(document.getElementById('goalSaved').value);
+
+      targets.push({ id: Date.now(), name, target, saved });
+      localStorage.setItem(TARGETS_KEY, JSON.stringify(targets));
+      renderGoals();
+      e.target.reset();
+    });
+
+    renderGoals();
+  </script>
+</body>
+</html>

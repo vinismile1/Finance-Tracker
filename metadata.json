@@ -1,0 +1,6 @@
+{
+  "name": "V.SAVE - Personal Finance Platform",
+  "description": "V.SAVE is a full-stack personal finance platform for tracking expenses, analyzing spending habits, managing savings goals, and scheduling payment reminders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

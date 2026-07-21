@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v.save - Financial Consultation</title>
+  <link rel="stylesheet" href="css/dashboad.css">
+  <style>
+    body {
+      font-family: "DM Serif Display", serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    .consult-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .advisor-card {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background: #fafafa;
+    }
+    .advisor-card img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .btn-contact {
+      background: #125132;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>V.SAVE</h2>
+      <button id="close" class="closebtn">✖</button>
+    </div>
+
+    <ul class="menu">
+      <li><a href="dashboad.html"><i class="fa-solid fa-table-columns"></i> Dashboard</a></li>
+      <li><a href="manage.html">📝 Manage</a></li>
+      <li><a href="view.html">🔍 View</a></li>
+      <li><a href="target.html">🎯 Target</a></li>
+      <li><a href="consult.html" class="active">👥 Consult</a></li>
+      <li><a href="logout.html">🏃‍♀️ Log out</a></li>
+    </ul>
+  </aside>
+
+  <div class="main-content">
+    <header class="dashboad-header">
+      <button id="menubtn" class="meanubtn">≣</button>
+      <h1>Financial Consultation & Advisory</h1>
+    </header>
+
+    <div class="consult-container">
+      <h2>Connect with Financial Experts</h2>
+      <p style="color:#555; margin-bottom: 1.5rem;">Get personalized advice on budgeting, tax planning, and investment strategies from qualified V.SAVE advisors.</p>
+
+      <div class="advisor-card">
+        <div style="background:#125132; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:bold;">SM</div>
+        <div style="flex:1;">
+          <h3 style="margin:0; color:#125132;">Sneha Mishra</h3>
+          <p style="margin:4px 0; color:#666;">Senior Wealth Advisor & Financial Analyst</p>
+          <small style="color:#888;">Specialization: Budget Optimization, Tax Planning</small>
+        </div>
+        <button class="btn-contact" onclick="alert('Consultation request sent! Our advisor will email you shortly.')">Book Session</button>
+      </div>
+
+      <div class="advisor-card">
+        <div style="background:#28a745; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:bold;">VK</div>
+        <div style="flex:1;">
+          <h3 style="margin:0; color:#125132;">Vikram Kumar</h3>
+          <p style="margin:4px 0; color:#666;">Investment & Portfolio Consultant</p>
+          <small style="color:#888;">Specialization: Savings Growth, Mutual Funds</small>
+        </div>
+        <button class="btn-contact" onclick="alert('Consultation request sent! Our advisor will email you shortly.')">Book Session</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById("sidebar");
+    const menuBtn = document.getElementById("menubtn");
+    const closeBtn = document.getElementById("close");
+    const mainContent = document.querySelector(".main-content");
+
+    if (menuBtn && sidebar) {
+      menuBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+        sidebar.classList.toggle("open");
+        mainContent.classList.toggle("shift");
+      });
+    }
+
+    if (closeBtn && sidebar) {
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        sidebar.classList.remove("open");
+        mainContent.classList.remove("shift");
+      });
+    }
+  </script>
+</body>
+</html>

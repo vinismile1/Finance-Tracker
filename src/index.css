@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-warm-ivory: #F4F1E8;
+    --bg-soft-sage: #DDE3D8;
+    --primary-deep-forest: #18352C;
+    --accent-warm-walnut: #8A6A4A;
+    --highlight-muted-brass: #B69A6A;
+    --text-charcoal-forest: #1D2722;
+  }
+
+  body {
+    background-color: #F4F1E8;
+    color: #1D2722;
+    font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Custom scrollbar for Warm Ivory & Deep Forest theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F4F1E8;
+}
+::-webkit-scrollbar-thumb {
+  background: #DDE3D8;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B69A6A;
+}
+
+/* Utility classes mapping requested colors */
+.bg-warm-ivory { background-color: #F4F1E8; }
+.bg-soft-sage { background-color: #DDE3D8; }
+.bg-deep-forest { background-color: #18352C; }
+.bg-warm-walnut { background-color: #8A6A4A; }
+.bg-muted-brass { background-color: #B69A6A; }
+.bg-charcoal-forest { background-color: #1D2722; }
+
+.text-warm-ivory { color: #F4F1E8; }
+.text-soft-sage { color: #DDE3D8; }
+.text-deep-forest { color: #18352C; }
+.text-warm-walnut { color: #8A6A4A; }
+.text-muted-brass { color: #B69A6A; }
+.text-charcoal-forest { color: #1D2722; }
+
+.border-warm-ivory { border-color: #F4F1E8; }
+.border-soft-sage { border-color: #DDE3D8; }
+.border-deep-forest { border-color: #18352C; }
+.border-warm-walnut { border-color: #8A6A4A; }
+.border-muted-brass { border-color: #B69A6A; }
+.border-charcoal-forest { border-color: #1D2722; }
+
+/* Custom card shadow */
+.shadow-cream {
+  box-shadow: 0 10px 30px -5px rgba(29, 39, 34, 0.05);
+}
+
