@@ -36,27 +36,27 @@ export const CartoonAvatars = {
     {
       id: 'm1',
       name: 'Aarav',
-      url: diceBear('adventurer', 'Aarav'),
+      url: diceBear('notionists', 'Aarav'),
     },
     {
       id: 'm2',
       name: 'Rohan',
-      url: diceBear('adventurer', 'Rohan'),
+      url: diceBear('notionists', 'Rohan'),
     },
     {
       id: 'm3',
       name: 'Alex',
-      url: diceBear('adventurer', 'Alex'),
+      url: diceBear('notionists', 'Alex'),
     },
     {
       id: 'm4',
       name: 'Ethan',
-      url: diceBear('adventurer', 'Ethan'),
+      url: diceBear('notionists', 'Ethan'),
     },
     {
       id: 'm5',
       name: 'Marcus',
-      url: diceBear('adventurer', 'Marcus'),
+      url: diceBear('notionists', 'Marcus'),
     },
   ],
 };
